@@ -1,4 +1,4 @@
-exports.exports = function(sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
     var Album = sequelize.define('album', {
         album_id: {
             type: DataTypes.INTEGER(5).UNSIGNED,
