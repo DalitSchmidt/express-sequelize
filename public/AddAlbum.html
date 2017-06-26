@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="js/jquery-3.2.1.js"></script>
+    <input type="text" name="name" placeholder="Name"><br>
+    <input type="text" name="artist" placeholder="Artist"><br>
+    <input type="text" name="img" placeholder="Image"><br>
+    <input type="text" name="year" placeholder="Year"><br>
+    <textarea name="description" id="" cols="30" rows="10"></textarea><br>
+    <button>Save</button>
+    <script>
+        $('button').on('click', function () {
+            var album = {
+                name: $('input[name=name]').val(),
+                artist: $('input[name=artist]').val(),
+                img: $('input[name=img]').val(),
+                year: $('input[name=year]').val(),
+                description: $('textarea[name=description]').val(),
+                songs: [
+                    {
+                        name: "Song name",
+                        url: "http://blabla.com/4reg4gt.mp3",
+                        duration: "319"
+                    },
+                    {
+                        name: "Song name",
+                        url: "http://blabla.com/4reg4gt.mp3",
+                        duration: "319"
+                    },
+                    {
+                        name: "Song name",
+                        url: "http://blabla.com/4reg4gt.mp3",
+                        duration: "319"
+                    },
+                ]
+            };
+
+            album = JSON.stringify(album);
+
+            $.ajax({
+                url: 'http://localhost:3000/api/albums',
+                method: 'POST',
+                contentType: 'application/json',
+                dataType: 'JSON',
+                data: album,
+                success: function ( response ) {
+                    console.log( response )
+                },
+            })
+        })
+    </script>
+</body>
+</html>
