@@ -1,6 +1,7 @@
-import Player from 'Player';
-import AlbumForm from 'AlbumForm';
-import AlbumBoard from 'AlbumsBoard';
+import $ from 'jquery';
+import Player from './Player';
+import AlbumForm from './AlbumForm';
+import AlbumBoard from './AlbumsBoard';
 
 const App = {
     init: function() {
@@ -10,4 +11,4 @@ const App = {
     }
 };
 
-App.init();
+$(document).ready( App.init );

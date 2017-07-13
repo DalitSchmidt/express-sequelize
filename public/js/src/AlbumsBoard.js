@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import DataService from './DataService';
 import Templates from './Templates';
 

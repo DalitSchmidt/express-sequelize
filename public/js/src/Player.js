@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default Player = {
     playAlbum: function ( album ) {
 

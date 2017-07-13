@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default AlbumForm = {
     // Using the function 'collectValues' we bring all the values in the inputs and textarea related to album (name, artist, image, year and description)
     collectValues: function() {
@@ -41,10 +43,10 @@ export default AlbumForm = {
     // Using the function 'collectSongs' we bring all the values from thr window of adding songs
     collectSongs: function() {
         // The variable 'songs_container will be array of all the '#songs-form' and '.song' divs
-        var songs_container = $('#songs-form .song');
+        let songs_container = $('#songs-form .song');
 
         // Declare of some variables that we are gonna use
-        var songs_inputs, i, songs = [];
+        let songs_inputs, i, songs = [];
 
         // Now we want to iterate on all the divs array and find the inputs
         for ( i = 0; i < songs_container.length; i++ ) {
@@ -67,7 +69,7 @@ export default AlbumForm = {
     // Using the function 'saveAlbum' we reserve this album with songs created
     saveAlbum: function( e ) {
         e.preventDefault();
-        var el = $(e.target),
+        let el = $(e.target),
             album = this.collectValues(),
             songs = this.collectSongs();
 
@@ -83,7 +85,7 @@ export default AlbumForm = {
         // Prevent the default action
         e.preventDefault();
         // The variable 'html' contains html text with the fields to add a new song
-        var html = `
+        let html = `
         <div class="form-group song">
             <input type="text" class="form-control" value="Song4" placeholder="Song name">
             <input type="text" class="form-control" value="http://lll.mp3" placeholder="Song URL">
