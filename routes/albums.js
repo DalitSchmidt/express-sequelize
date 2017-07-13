@@ -18,8 +18,7 @@ const Album = sequelize.define('album', {
     album_name: {
         type: Sequelize.STRING,
         validate: {
-            is: /^[A-Z][A-Za-z0-9- ?=.*#?!@_$%^&-()]+$/i,
-            unique: true
+            is: /^[A-Z][A-Za-z0-9- ?=.*#?!@_$%^&-()]+$/i
         }
     },
     album_image: {
@@ -55,7 +54,6 @@ const Song = sequelize.define('song', {
         type: Sequelize.STRING,
         validate: {
             is: /^[A-Z][A-Za-z0-9- ?=.*#?!@_$%^&-()]+$/i,
-            unique: true
         }
     },
     song_time: {
@@ -69,15 +67,16 @@ const Song = sequelize.define('song', {
         validate: {
             isUrl: true,
             is: /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:mp3)$/,
-            unique: true
         }
     }
 });
 
 router.get('/albums', (req, res) => {
     Album.findAll().then(( error, results, fields ) => {
-        if ( error ) throw error;
-        res.json(results)
+        // if ( error )
+        //     throw error;
+
+        res.send( results )
     })
 });
 
@@ -85,23 +84,9 @@ router.post('/albums', (req, res) => {
     let album = req.body;
     let songs = album.songs;
 
-    Album.create(album).then(( error, result, fields ) => {
-        if ( error ) {
-            if ( error.code == 'ER_DUP_ENTRY' )
-                res.status(400).send({ error: `Album ${album.name} already exists` });
-            else
-                res.status(500).send({ error: 'General Server Error' })
-        } else {
-            let album_id = result.insertId;
-
-            Song.create(songs).then((error, result, fields) => {
-                res.status(201).send({id: album_id})
-            })
-
-            //console.log(results)
-            //console.log(error)
-            //res.send('done')
-        }})
+    Album.create( album ).then(( error, result, fields ) => {
+        res.send(result)
+    })
 });
 
 router.get('/albums/:album_id', (req, res) => {
@@ -123,8 +108,8 @@ router.put('/albums/:album_id', (req, res) => {
         {album}, {where: {album_id: album_id}}
     ).then(function (affectedRows) {
         Album.findAll(album).then((error, result, fields) => {
-            if (error) throw error;
-            res.json(result)
+            if ( error ) throw error;
+            res.json( result )
         })
     })
 });
@@ -139,7 +124,7 @@ router.delete('/albums/:album_id', (req, res) => {
             res.json({ error: `Album id ${album_id} not found` })
         } else {
             res.json({ success: true });
-            res.json(deleted)
+            res.json( deleted )
         }
     })
 });

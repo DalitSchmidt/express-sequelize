@@ -9,8 +9,8 @@ router.get('/', function(req, res) {
         res.render('index', {
             title: 'Sequelize: Express Example',
             users: users
-        });
-    });
-});
+        })
+    })
+})
 
-module.exports = router;
+module.exports = router
